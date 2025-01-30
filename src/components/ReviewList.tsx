@@ -4,13 +4,11 @@ const ReviewList = () => {
   const reviews = useTypedSelector((state) => state.reviews.items);
 
   return (
-    <div>
-      <h2>Reviews</h2>
-      {reviews.map((review) => (
-        <div key={review.id}>
-          <p>
-            {review.content} - ⭐{review.rating}
-          </p>
+    <div className="p-4 space-y-4">
+      {reviews.map(({ id, content, rating }) => (
+        <div key={id} className="p-4 bg-gray-100 rounded-md shadow">
+          <p className="font-semibold text-lg">{content}</p>
+          <p className="text-sm text-gray-500">Rating: {rating}</p>
         </div>
       ))}
     </div>
