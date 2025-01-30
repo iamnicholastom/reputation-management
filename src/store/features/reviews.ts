@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Review {
-  id: string;
-  content: string;
+  name: string;
+  email: string;
   rating: number;
+  review: string;
 }
 
 interface ReviewsState {
