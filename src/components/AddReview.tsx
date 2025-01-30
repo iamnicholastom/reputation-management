@@ -18,12 +18,14 @@ const AddReview = () => {
   return (
     <form onSubmit={handleSubmit}>
       <label htmlFor="description">Description</label>
+      <br />
       <input
         type="text"
         value={content}
         onChange={(e) => setContent(e.target.value)}
         id="description"
       />
+      <br />
       <button>Submit Review</button>
     </form>
   );
