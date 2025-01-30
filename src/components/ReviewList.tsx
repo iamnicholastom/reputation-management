@@ -1,7 +1,7 @@
-import { useSelector } from "react-redux";
+import { useTypedSelector } from "../store/hooks";
 
 const ReviewList = () => {
-  const reviews = useSelector((state) => state.reviews.items);
+  const reviews = useTypedSelector((state) => state.reviews.items);
 
   return (
     <div>
