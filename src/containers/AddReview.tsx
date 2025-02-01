@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addReview } from "../store/features/reviews";
 import Label from "../components/Label/Label";
+import Input from "../components/Input/Input";
 
 const AddReview = () => {
   const dispatch = useDispatch();
@@ -40,27 +41,24 @@ const AddReview = () => {
     }
   }
 
+  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
+    setFormData({ ...formData, name: event.target.value });
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
       <div className="w-full max-w-xl bg-white rounded-lg shadow-card p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Add a Review</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label>Name</Label>
-            <input
-              type="text"
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className={`w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition ${
-                errors.name ? "border-red-500" : "border-gray-300"
-              }`}
+            <Input
+              label="Name"
+              htmlFor="name"
               placeholder="Your name"
+              value={formData.name}
+              onChange={handleNameChange}
+              error={errors.name}
             />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-            )}
           </div>
           <div>
             <Label>Email</Label>
