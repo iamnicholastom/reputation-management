@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addReview } from "../store/features/reviews";
+import Label from "../components/Label/Label";
 
 const AddReview = () => {
   const dispatch = useDispatch();
@@ -45,9 +46,7 @@ const AddReview = () => {
         <h2 className="text-2xl font-bold text-gray-900 mb-6">Add a Review</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Name
-            </label>
+            <Label>Name</Label>
             <input
               type="text"
               value={formData.name}
@@ -64,9 +63,7 @@ const AddReview = () => {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
+            <Label>Email</Label>
             <input
               type="email"
               value={formData.email}
@@ -83,9 +80,7 @@ const AddReview = () => {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Rating
-            </label>
+            <Label>Rating</Label>
             <div className="flex gap-2">
               {[1, 2, 3, 4, 5].map((star) => (
                 <button
@@ -107,9 +102,7 @@ const AddReview = () => {
             )}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Review
-            </label>
+            <Label>Review</Label>
             <textarea
               value={formData.review}
               onChange={(e) =>
