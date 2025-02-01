@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface Review {
+  id: string;
   name: string;
   email: string;
   rating: number;
@@ -23,8 +24,8 @@ const reviews = createSlice({
   name: "reviews",
   initialState,
   reducers: {
-    addReview: (state, action: PayloadAction<Review>) => {
-      state.items.push(action.payload);
+    addReview: (state, action: PayloadAction<Omit<Review, "id">>) => {
+      state.items.push({ id: crypto.randomUUID(), ...action.payload });
     },
     setReviews: (state, action: PayloadAction<Review[]>) => {
       state.items = action.payload;

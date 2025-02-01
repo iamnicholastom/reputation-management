@@ -27,7 +27,12 @@ const AddReview = () => {
     e.preventDefault();
     if (validateForm()) {
       dispatch(addReview(formData));
-      setFormData({ name: "", email: "", rating: 0, review: "" });
+      setFormData({
+        name: "",
+        email: "",
+        rating: 0,
+        review: "",
+      });
     }
   }
 
