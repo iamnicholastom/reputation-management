@@ -1,15 +1,13 @@
-import AddReview from "./components/AddReview";
-import ReviewList from "./components/ReviewList";
+import AddReview from "./containers/AddReview";
+import ReviewList from "./containers/ReviewList";
+import { Routes, Route } from "react-router";
 
 function App() {
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">
-        Review & Feedback Management
-      </h1>
-      <AddReview />
-      <ReviewList />
-    </>
+    <Routes>
+      <Route path="/" element={<ReviewList />} />
+      <Route path="/add-review" element={<AddReview />} />
+    </Routes>
   );
 }
 
