@@ -1,9 +1,4 @@
-import { ReactNode } from "react";
-
-interface Props {
-  children: ReactNode;
-  htmlFor?: string;
-}
+import { LabelProps as Props } from "./Label.interface";
 
 const Label = ({ children, htmlFor }: Props) => {
   return (
