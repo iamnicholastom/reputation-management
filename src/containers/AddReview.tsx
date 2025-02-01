@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { addReview } from "../store/features/reviews";
 
 const AddReview = () => {
@@ -11,6 +12,7 @@ const AddReview = () => {
     review: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const navigate = useNavigate();
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -33,6 +35,7 @@ const AddReview = () => {
         rating: 0,
         review: "",
       });
+      navigate("/");
     }
   }
 
