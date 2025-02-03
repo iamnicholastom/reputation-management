@@ -5,17 +5,6 @@ import { addReview } from "../store/features/reviews";
 import Label from "../components/Label/Label";
 import Input from "../components/Input/Input";
 
-// Replace the current type error with this
-interface StrictTyping {
-  id: number;
-}
-
-const strictObject: StrictTyping = {
-  id: "this is definitely a string", // This will cause a clear type error
-};
-
-console.log(strictObject);
-
 const AddReview = () => {
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({

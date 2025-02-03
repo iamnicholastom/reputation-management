@@ -10,8 +10,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,html,json}\"",
     "preview": "vite preview",
-    "prepare": "husky",
-    "type-check": "tsc --noEmit"
+    "prepare": "husky"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
