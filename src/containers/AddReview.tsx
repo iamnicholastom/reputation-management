@@ -21,7 +21,7 @@ const AddReview = () => {
     if (!formData.name) newErrors.name = "Name is required";
     if (!formData.email) newErrors.email = "Email is required";
     if (formData.rating === 0) newErrors.rating = "Please select a rating";
-    if (!formData.review) newErrors.review = "Review text is required";
+    if (!formData.review) newErrors.review = "Review is required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
