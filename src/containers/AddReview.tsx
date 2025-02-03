@@ -6,6 +6,8 @@ import Label from "../components/Label/Label";
 import Input from "../components/Input/Input";
 
 const AddReview = () => {
+  const name: number = "John"; // Type error: string assigned to number
+  console.log(name);
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
     name: "",
