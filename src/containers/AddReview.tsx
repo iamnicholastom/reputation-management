@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { addReview } from "../store/features/reviews";
@@ -41,10 +41,6 @@ const AddReview = () => {
     }
   }
 
-  function handleNameChange(event: ChangeEvent<HTMLInputElement>) {
-    setFormData({ ...formData, name: event.target.value });
-  }
-
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
       <div className="w-full max-w-xl bg-white rounded-lg shadow-card p-8">
@@ -56,26 +52,24 @@ const AddReview = () => {
               htmlFor="name"
               placeholder="Your name"
               value={formData.name}
-              onChange={handleNameChange}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               error={errors.name}
             />
           </div>
           <div>
-            <Label>Email</Label>
-            <input
+            <Input
               type="email"
+              label="Email"
               value={formData.email}
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className={`w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition ${
-                errors.email ? "border-red-500" : "border-gray-300"
-              }`}
               placeholder="your@email.com"
+              error={errors.email}
+              htmlFor="email"
             />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-            )}
           </div>
           <div>
             <Label>Rating</Label>
