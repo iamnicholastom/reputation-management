@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 interface Review {
   id: string;
@@ -8,37 +8,46 @@ interface Review {
   review: string;
 }
 
-interface ReviewsState {
-  items: Review[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
+interface ReviewSubmitData {
+  name: string;
+  email: string;
+  rating: number;
+  review: string;
 }
 
-const initialState: ReviewsState = {
-  items: [],
-  status: "idle",
-  error: null,
-};
+export const reviewsApi = createApi({
+  reducerPath: "reviewsApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://reputation-management-backend-41vt.onrender.com/api/",
+  }),
+  tagTypes: ["Review"],
+  endpoints: (builder) => ({
+    getReviews: builder.query<Review[], void>({
+      query: () => "reviews",
+      providesTags: ["Review"],
+    }),
 
-const reviews = createSlice({
-  name: "reviews",
-  initialState,
-  reducers: {
-    addReview: (state, action: PayloadAction<Omit<Review, "id">>) => {
-      state.items.push({ id: crypto.randomUUID(), ...action.payload });
-    },
-    setReviews: (state, action: PayloadAction<Review[]>) => {
-      state.items = action.payload;
-    },
-    setLoading: (state) => {
-      state.status = "loading";
-    },
-    setError: (state, action: PayloadAction<string>) => {
-      state.error = action.payload;
-      state.status = "failed";
-    },
-  },
+    addReview: builder.mutation<Review, ReviewSubmitData>({
+      query: (review) => ({
+        url: "reviews",
+        method: "POST",
+        body: review,
+      }),
+      invalidatesTags: ["Review"],
+    }),
+
+    deleteReview: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `reviews/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Review"],
+    }),
+  }),
 });
 
-export const { addReview, setReviews, setLoading, setError } = reviews.actions;
-export default reviews.reducer;
+export const {
+  useGetReviewsQuery,
+  useAddReviewMutation,
+  useDeleteReviewMutation,
+} = reviewsApi;

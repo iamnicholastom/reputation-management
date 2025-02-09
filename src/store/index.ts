@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import reviewsReducer from "./features/reviews";
+import { reviewsApi } from "./features/reviews";
 
 export const store = configureStore({
   reducer: {
-    reviews: reviewsReducer,
+    [reviewsApi.reducerPath]: reviewsApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(reviewsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

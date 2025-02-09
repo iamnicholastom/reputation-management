@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useTypedSelector } from "../store/hooks";
+import { useGetReviewsQuery } from "../store/features/reviews";
 
 const ReviewList = () => {
-  const reviews = useTypedSelector((state) => state.reviews.items);
+  const { data: reviews = [], isLoading, error } = useGetReviewsQuery();
+
   const [editingReview, setEditingReview] = useState<string | null>(null);
   const [editedText, setEditedText] = useState("");
 
@@ -21,6 +22,24 @@ const ReviewList = () => {
     console.log(`Saving updated review for ID: ${id}`, editedText);
     setEditingReview(null);
   };
+
+  // Show loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
+        <div className="text-gray-500 text-lg">Loading reviews...</div>
+      </div>
+    );
+  }
+
+  // Show error state
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
+        <div className="text-red-500 text-lg">Error loading reviews</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">

@@ -1,19 +1,20 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { addReview } from "../store/features/reviews";
+import { useAddReviewMutation } from "../store/features/reviews";
 import Label from "../components/Label/Label";
 import Input from "../components/Input/Input";
 import StarRating from "../components/StarRating/StarRating";
 
 const AddReview = () => {
-  const dispatch = useDispatch();
+  const [addReview, { isLoading }] = useAddReviewMutation();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     rating: 0,
     review: "",
   });
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const navigate = useNavigate();
 
@@ -28,17 +29,21 @@ const AddReview = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (validateForm()) {
-      dispatch(addReview(formData));
-      setFormData({
-        name: "",
-        email: "",
-        rating: 0,
-        review: "",
-      });
-      navigate("/");
+      try {
+        await addReview(formData).unwrap();
+        setFormData({
+          name: "",
+          email: "",
+          rating: 0,
+          review: "",
+        });
+        navigate("/");
+      } catch (err) {
+        console.error("Failed to save the review:", err);
+      }
     }
   }
 
@@ -96,9 +101,12 @@ const AddReview = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium"
+            disabled={status === "loading"}
+            className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium ${
+              status === "loading" ? "opacity-50 cursor-not-allowed" : ""
+            }`}
           >
-            Submit Review
+            {isLoading ? "Submitting..." : "Submit Review"}
           </button>
         </form>
       </div>
