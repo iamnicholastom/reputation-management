@@ -18,7 +18,7 @@ interface ReviewSubmitData {
 export const reviewsApi = createApi({
   reducerPath: "reviewsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://reputation-management-backend-41vt.onrender.com/api/",
+    baseUrl: import.meta.env.VITE_API_URL,
   }),
   tagTypes: ["Review"],
   endpoints: (builder) => ({
