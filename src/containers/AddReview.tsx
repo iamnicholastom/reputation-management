@@ -41,7 +41,7 @@ const AddReview = () => {
           rating: 0,
           review: "",
         });
-        navigate("/");
+        navigate("/reviews");
       } catch (err) {
         console.error("Failed to save the review:", err);
       }

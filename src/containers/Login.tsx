@@ -2,21 +2,12 @@ import React, { useState } from "react";
 import Input from "../components/Input/Input";
 import Button from "../components/Button/Button";
 import { AuthFormData, FormErrors } from "./Register";
-import { useLocation, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useLoginMutation } from "../store/features/auth";
-
-interface LocationState {
-  from: {
-    pathname: string;
-  };
-}
 
 const Login = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [login, { isLoading }] = useLoginMutation();
-
-  const from = (location.state as LocationState)?.from?.pathname || "/";
 
   const [formData, setFormData] = useState<AuthFormData>({
     email: "",
@@ -46,7 +37,7 @@ const Login = () => {
     if (!validateForm()) return;
     try {
       await login(formData).unwrap();
-      navigate(from, { replace: true }); // Redirect to home page after successful registration
+      navigate("/reviews", { replace: true }); // Redirect to home page after successful registration
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       setErrors({
