@@ -63,6 +63,7 @@ const Register = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -87,6 +88,7 @@ const Register = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <Input
+              name="email"
               label="Email Address"
               type="email"
               placeholder="Enter your email"
@@ -96,6 +98,7 @@ const Register = () => {
               htmlFor="email"
             />
             <Input
+              name="password"
               label="Password"
               type="password"
               placeholder="Enter your password"

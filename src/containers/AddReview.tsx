@@ -55,6 +55,7 @@ const AddReview = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <Input
+              name="name"
               label="Name"
               htmlFor="name"
               placeholder="Your name"
@@ -67,6 +68,7 @@ const AddReview = () => {
           </div>
           <div>
             <Input
+              name="email"
               type="email"
               label="Email"
               value={formData.email}

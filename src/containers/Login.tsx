@@ -83,6 +83,7 @@ const Login = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <Input
+              name="email"
               label="Email Address"
               type="email"
               placeholder="Enter your email"
@@ -92,6 +93,7 @@ const Login = () => {
               htmlFor="email"
             />
             <Input
+              name="password"
               label="Password"
               type="password"
               placeholder="Enter your password"
