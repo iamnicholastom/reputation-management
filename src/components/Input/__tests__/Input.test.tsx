@@ -6,6 +6,7 @@ describe("Input Component", () => {
   it("renders input element with all props correctly", () => {
     render(
       <Input
+        name="username"
         label="Username"
         type="text"
         placeholder="Enter username"
@@ -28,6 +29,7 @@ describe("Input Component", () => {
     render(
       <Input
         label="Username"
+        name="username"
         value=""
         onChange={() => {}}
         error="This field is required"
@@ -46,6 +48,7 @@ describe("Input Component", () => {
     const handleChange = vi.fn();
     render(
       <Input
+        name="username"
         label="Username"
         value=""
         onChange={handleChange}
@@ -60,7 +63,9 @@ describe("Input Component", () => {
   });
 
   it("does not render label when label prop is not provided", () => {
-    render(<Input value="" onChange={() => {}} htmlFor="username" />);
+    render(
+      <Input value="" name="username" onChange={() => {}} htmlFor="username" />
+    );
 
     const labelElements = screen.queryByRole("label");
     expect(labelElements).toBeNull();
