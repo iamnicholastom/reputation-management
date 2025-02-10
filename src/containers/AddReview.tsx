@@ -4,6 +4,7 @@ import { useAddReviewMutation } from "../store/features/reviews";
 import Label from "../components/Label/Label";
 import Input from "../components/Input/Input";
 import StarRating from "../components/StarRating/StarRating";
+import Button from "../components/Button/Button";
 
 const AddReview = () => {
   const [addReview, { isLoading }] = useAddReviewMutation();
@@ -99,15 +100,9 @@ const AddReview = () => {
               <p className="mt-1 text-sm text-red-500">{errors.review}</p>
             )}
           </div>
-          <button
-            type="submit"
-            disabled={status === "loading"}
-            className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium ${
-              status === "loading" ? "opacity-50 cursor-not-allowed" : ""
-            }`}
-          >
-            {isLoading ? "Submitting..." : "Submit Review"}
-          </button>
+          <Button type="submit" isLoading={isLoading} disabled={isLoading}>
+            Submit Review
+          </Button>
         </form>
       </div>
     </div>
