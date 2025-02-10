@@ -19,6 +19,11 @@ export const reviewsApi = createApi({
   reducerPath: "reviewsApi",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
+    credentials: "include",
+    prepareHeaders: (headers) => {
+      // No need to manually set the token since it's in httpOnly cookie
+      return headers;
+    },
   }),
   tagTypes: ["Review"],
   endpoints: (builder) => ({
