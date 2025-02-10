@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<ReviewList />} />
+      <Route path="/" element={<Login />} />
       <Route
         path="/add-review"
         element={
@@ -27,7 +27,7 @@ function App() {
         }
       />
       <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/reviews" element={<ReviewList />} />
     </Routes>
   );
 }
