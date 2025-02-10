@@ -7,12 +7,15 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const location = useLocation();
-  const isAuthenticated = useTypedSelector(
-    (state) => state.auth.isAuthenticated
+  const { isAuthenticated, initialized } = useTypedSelector(
+    (state) => state.auth
   );
 
+  if (!initialized) {
+    return null; // Or loading spinner
+  }
+
   if (!isAuthenticated) {
-    // Redirect to login page but save the attempted location
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
