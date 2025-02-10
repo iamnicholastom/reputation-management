@@ -1,4 +1,3 @@
-// Navbar.tsx
 import { useNavigate } from "react-router";
 import { useLogoutMutation } from "../store/features/auth";
 import Button from "../components/Button/Button";
@@ -9,10 +8,12 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      await logout().unwrap();
-      document.cookie =
-        "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      navigate("/");
+      const response = await logout().unwrap();
+      if (response.message) {
+        document.cookie =
+          "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        navigate("/");
+      }
     } catch (err) {
       console.error("Logout failed:", err);
     }
