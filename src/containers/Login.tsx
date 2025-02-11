@@ -98,7 +98,12 @@ const Login = () => {
               htmlFor="password"
             />
           </div>
-          <Button type="submit" isLoading={isLoading} disabled={isLoading}>
+          <Button
+            type="submit"
+            fullWidth
+            isLoading={isLoading}
+            disabled={isLoading}
+          >
             Sign In
           </Button>
         </form>
