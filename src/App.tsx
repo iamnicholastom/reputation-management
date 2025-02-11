@@ -1,8 +1,6 @@
 import AddReview from "./containers/AddReview";
 import Login from "./containers/Login";
 import Navbar from "./containers/Navbar";
-import ProtectedRoute from "./containers/ProtectedRoute";
-import PublicRoute from "./containers/PublicRoute";
 import Register from "./containers/Register";
 import ReviewList from "./containers/ReviewList";
 import { Routes, Route } from "react-router";
@@ -13,38 +11,10 @@ function App() {
     <>
       {showNavbar && <Navbar />}
       <Routes>
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/reviews"
-          element={
-            <ProtectedRoute>
-              <ReviewList />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/add-review"
-          element={
-            <ProtectedRoute>
-              <AddReview />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/reviews" element={<ReviewList />} />
+        <Route path="/add-review" element={<AddReview />} />
       </Routes>
     </>
   );

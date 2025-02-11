@@ -33,11 +33,15 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!validateForm()) return;
+
     try {
-      await login(formData).unwrap();
-      navigate("/reviews", { replace: true }); // Redirect to home page after successful registration
+      const response = await login(formData).unwrap();
+      if (response.user) {
+        // Wait for RTK Query to update its internal state
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        navigate("/reviews", { replace: true });
+      }
     } catch (err: unknown) {
       const error = err as { data?: { message?: string } };
       setErrors({
