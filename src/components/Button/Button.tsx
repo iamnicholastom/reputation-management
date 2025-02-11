@@ -12,7 +12,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       disabled={disabled || isLoading}
-      className={`w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium ${
+      className={` bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium ${
         disabled || isLoading ? "opacity-50 cursor-not-allowed" : ""
       }`}
     >
