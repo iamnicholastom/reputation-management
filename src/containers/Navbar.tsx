@@ -1,8 +1,10 @@
 import { useNavigate } from "react-router";
 import { useLogoutMutation } from "../store/features/auth";
 import Button from "../components/Button/Button";
+import { useAuth } from "../store/hooks";
 
 const Navbar = () => {
+  const { isAuthenticated } = useAuth();
   const navigate = useNavigate();
   const [logout] = useLogoutMutation();
 
@@ -29,10 +31,14 @@ const Navbar = () => {
             <h1 className="text-xl font-bold">Review System</h1>
           </div>
           <div className="flex items-center space-x-4">
-            {window.location.pathname === "/reviews" && (
-              <Button onClick={handleAddReview}>Add Review</Button>
+            {isAuthenticated && (
+              <>
+                {window.location.pathname === "/reviews" && (
+                  <Button onClick={handleAddReview}>Add Review</Button>
+                )}
+                <Button onClick={handleLogout}>Logout</Button>
+              </>
             )}
-            <Button onClick={handleLogout}>Logout</Button>
           </div>
         </div>
       </div>
