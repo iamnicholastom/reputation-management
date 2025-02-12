@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "type-check": "tsc --noEmit",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "eslint .",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,css,md,json}\"",
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx,css,html,json}\"",
@@ -15,7 +15,6 @@
     "prepare": "husky",
     "test": "vitest",
     "test:ui": "vitest --ui"
-    
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.1",
