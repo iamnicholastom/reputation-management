@@ -31,4 +31,8 @@ jobs:
         run: npm test
 
   security_scan:
+    permissions:
+      actions: read
+      security-events: write
+      contents: read
     uses: "google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v1.9.1"
