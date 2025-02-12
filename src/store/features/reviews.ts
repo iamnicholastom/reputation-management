@@ -15,6 +15,14 @@ interface ReviewSubmitData {
   review: string;
 }
 
+interface GetReviewsResponse {
+  reviews: Review[];
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalReviews: number;
+}
+
 export const reviewsApi = createApi({
   reducerPath: "reviewsApi",
   baseQuery: fetchBaseQuery({
@@ -27,8 +35,11 @@ export const reviewsApi = createApi({
   }),
   tagTypes: ["Review"],
   endpoints: (builder) => ({
-    getReviews: builder.query<Review[], void>({
-      query: () => "reviews",
+    getReviews: builder.query<
+      GetReviewsResponse,
+      { page: number; limit: number }
+    >({
+      query: ({ page, limit }) => `reviews?page=${page}&limit=${limit}`,
       providesTags: ["Review"],
     }),
 

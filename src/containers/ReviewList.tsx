@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { useGetReviewsQuery } from "../store/features/reviews";
 
 const ReviewList = () => {
-  const { data: reviews = [], isLoading, error } = useGetReviewsQuery();
+  const [page, setPage] = useState(1);
+  const limit = 5;
+  const { data, isLoading, error } = useGetReviewsQuery({ page, limit });
 
   const getSentimentColor = (rating: number) => {
     if (rating >= 4) return "bg-green-100 border-green-400 text-green-800";
@@ -26,6 +29,8 @@ const ReviewList = () => {
       </div>
     );
   }
+
+  const { reviews, totalPages = 1 } = data ?? { reviews: [], totalPages: 1 };
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center pt-16">
@@ -68,6 +73,25 @@ const ReviewList = () => {
             </div>
           ))
         )}
+      </div>
+      <div className="mt-6 flex gap-4">
+        <button
+          disabled={page === 1}
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300"
+        >
+          Previous
+        </button>
+        <span className="text-gray-700">
+          Page {page} of {totalPages}
+        </span>
+        <button
+          disabled={page === totalPages}
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          className="px-4 py-2 bg-blue-500 text-white rounded-md disabled:bg-gray-300"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
