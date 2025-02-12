@@ -54,5 +54,8 @@
     "*.{js,jsx,css,md,json}": [
       "prettier --write"
     ]
+  },
+  "overrides": {
+    "esbuild": "^0.25.0"
   }
 }
