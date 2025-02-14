@@ -5,11 +5,18 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  pull-requests: read # allows SonarCloud to decorate PRs with analysis results
+  contents: write
+
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Important for SonarCloud
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -29,6 +36,12 @@ jobs:
 
       - name: Test
         run: npm test
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   security_scan:
     permissions:
