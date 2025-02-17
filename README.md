@@ -25,9 +25,6 @@ The project implements continuous code quality and security scanning through:
 ### OSV Scanner
 
 - Vulnerability scanning for dependencies
-- Integration with GitHub Security Dashboard
-- Continuous monitoring of known vulnerabilities
-- Automated security alerts
 
 ## Getting Started
 
